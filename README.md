@@ -20,7 +20,7 @@ const index = new FistConnection('localhost', 5575)
 ##### Indexing
 
 ```js
-index.add('doc_1', 'the quick brown fox jumped over the lazy dog')
+index.index('doc_1', 'the quick brown fox jumped over the lazy dog')
 ```
 
 ##### Searching
