@@ -1,6 +1,6 @@
 {
   "name": "node-fist",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node.js client library for Fist full text search",
   "main": "index.js",
   "license": "MIT",
