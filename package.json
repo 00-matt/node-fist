@@ -4,8 +4,16 @@
   "description": "Node.js client library for Fist full text search",
   "main": "index.js",
   "license": "MIT",
-  "keywords": ["fist"],
+  "keywords": [
+    "fist"
+  ],
   "homepage": "https://github.com/00-matt/node-fist#readme",
   "bugs": "https://github.com/00-matt/node-fist/issues",
-  "repository": "github:00-matt/node-fist"
+  "repository": "github:00-matt/node-fist",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
