@@ -8,7 +8,7 @@ class FistConnection {
    * @param {string} host - The hostname of the Fist server
    * @param {number} port - The port of the Fist server
    */
-  constructor (host = localhost, port = 5575) {
+  constructor (host = 'localhost', port = 5575) {
     this._incomplete = ''
     this._callbacks = []
     this._socket = new net.Socket()
