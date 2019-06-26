@@ -41,8 +41,10 @@ class FistConnection {
   index (doc, data, cb) {
     this._socket.write(`INDEX ${doc} ${data}\r\n`, 'utf8', () => {
       this._callbacks.push(line => {
-        const err = line === 'Text has been indexed' ? null : 'Invalid response'
-        if (cb) return cb(err)
+        if (line === 'Text has been indexed') {
+          return cb(null)
+        }
+        return cb(new Error('Invalid response'))
       })
     })
   }
