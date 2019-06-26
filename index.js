@@ -1,6 +1,13 @@
 const net = require('net')
 
+/** Represents a connection to a Fist server. */
 class FistConnection {
+  /**
+   * Create a new connection to a Fist server.
+   *
+   * @param {string} host - The hostname of the Fist server
+   * @param {number} port - The port of the Fist server
+   */
   constructor (host = localhost, port = 5575) {
     this._incomplete = ''
     this._callbacks = []
@@ -24,6 +31,13 @@ class FistConnection {
     })
   }
 
+  /**
+   * Add a document to the index.
+   *
+   * @param {string} doc - The name of the document to be added
+   * @param {string} data - The contents of the document to be added
+   * @param {function} cb - A callback to be notified when the document is added
+   */
   index (doc, data, cb) {
     this._socket.write(`INDEX ${doc} ${data}\r\n`, 'utf8', () => {
       this._callbacks.push(line => {
@@ -33,6 +47,12 @@ class FistConnection {
     })
   }
 
+  /**
+   * Search for a document in the index.
+   *
+   * @param {string} data - A string to search the index for
+   * @param {function} cb - A callback called with the results
+   */
   search (data, cb) {
     this._socket.write(`SEARCH ${data}\r\n`, 'utf8', () => {
       this._callbacks.push(line => {
