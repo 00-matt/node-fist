@@ -4,17 +4,22 @@ const util = require('util')
 
 const net = jest.genMockFromModule('net')
 
-function noop () {}
-
 net.Socket = class extends EventEmitter {
   constructor () {
     super()
+    this.destroyed = false
     this.readable = true
     this.writable = true
   }
 
+  end (cb) {
+    this.destroyed = true
+    this.readable = false
+    this.writable = false
+    cb()
+  }
   connect () { this.emit('connect') }
-  reply (data) { this.emit('data', data) }
+  reply (data) { this.readable && this.emit('data', data) }
   write () {}
 }
 

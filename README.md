@@ -41,6 +41,12 @@ index.search('lazy dog', (err, documents) => {
 })
 ```
 
+##### Disconnecting
+
+```js
+index.close()
+```
+
 ### License
 
 Released under the terms of the MIT license.

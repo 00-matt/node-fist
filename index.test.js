@@ -3,6 +3,21 @@ jest.mock('net')
 const { FistConnection } = require('./')
 
 describe('FistConnection', () => {
+  describe('close', () => {
+    it('should close the socket', done => {
+      const index = new FistConnection()
+      index._socket.end = jest.fn(index._socket.end)
+      index._socket.write = jest.fn((chunk, encoding, cb) => {
+        expect(chunk).toEqual('EXIT\r\n')
+        cb()
+        index._socket.reply('Bye\n')
+      })
+      index.close(() => {
+        expect(index._socket.end.mock.calls.length).toEqual(1)
+        done()
+      })
+    })
+  })
   describe('index', () => {
     it('should successfuly index documents', done => {
       const index = new FistConnection()

@@ -32,6 +32,20 @@ class FistConnection {
   }
 
   /**
+   * Gracefully disconnect from the server and close the socket.
+   *
+   * @param {function} cb - A callback to be notified once the operation is
+   *                        complete
+   */
+  close (cb) {
+    this._socket.write('EXIT\r\n', 'utf8', () => {
+      this._callbacks.push(line => {
+        this._socket.end(cb)
+      })
+    })
+  }
+
+  /**
    * Add a document to the index.
    *
    * @param {string} doc - The name of the document to be added
