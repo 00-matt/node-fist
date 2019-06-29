@@ -9,11 +9,7 @@ npm install node-fist
 
 ### Support and Requirements
 
-Only the following Node.js versions are supported:
-
-* 10.16.0 LTS
-* 12.4.0 Current
-
+Only the LTS and Current Node.js versions are supported.
 Other versions may work, but are not actively tested.
 
 ### Usage
