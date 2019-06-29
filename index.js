@@ -1,5 +1,7 @@
 const net = require('net')
 
+const nop = () => {}
+
 /** Represents a connection to a Fist server. */
 class FistConnection {
   /**
@@ -37,7 +39,7 @@ class FistConnection {
    * @param {function} cb - A callback to be notified once the operation is
    *                        complete
    */
-  close (cb) {
+  close (cb = nop) {
     this._socket.write('EXIT\r\n', 'utf8', () => {
       this._callbacks.push(line => {
         this._socket.end(cb)
@@ -52,7 +54,7 @@ class FistConnection {
    * @param {string} data - The contents of the document to be added
    * @param {function} cb - A callback to be notified when the document is added
    */
-  index (doc, data, cb) {
+  index (doc, data, cb = nop) {
     this._socket.write(`INDEX ${doc} ${data}\r\n`, 'utf8', () => {
       this._callbacks.push(line => {
         if (line === 'Text has been indexed') {
@@ -69,7 +71,7 @@ class FistConnection {
    * @param {string} data - A string to search the index for
    * @param {function} cb - A callback called with the results
    */
-  search (data, cb) {
+  search (data, cb = nop) {
     this._socket.write(`SEARCH ${data}\r\n`, 'utf8', () => {
       this._callbacks.push(line => {
         try {
